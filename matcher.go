@@ -2,6 +2,7 @@ package cli_table_matcher
 
 import (
 	"bytes"
+	"strings"
 
 	"fmt"
 
@@ -14,7 +15,7 @@ type tableMatcher struct {
 	expectedStr string
 }
 
-func MatchCLITable(expected *terminal.Table) types.GomegaMatcher {
+func ContainCLITable(expected *terminal.Table) types.GomegaMatcher {
 	return &tableMatcher{
 		expected: expected,
 	}
@@ -32,9 +33,9 @@ func (m *tableMatcher) Match(actual interface{}) (bool, error) {
 	if err != nil {
 		return false, fmt.Errorf("unable to process expected")
 	}
-	m.expectedStr = expectedBytes.String()
+	m.expectedStr = strings.TrimSpace(expectedBytes.String())
 
-	if a == expectedBytes.String() {
+	if strings.Contains(a, m.expectedStr) {
 		return true, nil
 	}
 

@@ -20,7 +20,7 @@ var _ = Describe("CLITableMatcher", func() {
 	})
 
 	It("returns error if the actual isn't stringable", func() {
-		result, err := MatchCLITable(table).Match(nil)
+		result, err := ContainCLITable(table).Match(nil)
 		Expect(err).To(HaveOccurred())
 		Expect(result).To(BeFalse())
 	})
@@ -32,7 +32,7 @@ var _ = Describe("CLITableMatcher", func() {
 		actualBuf := bytes.NewBuffer(b)
 		actualTable.PrintTo(actualBuf)
 
-		result, err := MatchCLITable(table).Match(actualBuf.String())
+		result, err := ContainCLITable(table).Match(actualBuf.String())
 		Expect(result).To(BeTrue())
 		Expect(err).ToNot(HaveOccurred())
 	})
@@ -44,7 +44,7 @@ var _ = Describe("CLITableMatcher", func() {
 		actualBuf := bytes.NewBuffer(b)
 		actualTable.PrintTo(actualBuf)
 
-		Expect(actualBuf.String()).To(MatchCLITable(table))
+		Expect(actualBuf.String()).To(ContainCLITable(table))
 	})
 
 	It("does not match cli table", func() {
@@ -54,7 +54,7 @@ var _ = Describe("CLITableMatcher", func() {
 		actualBuf := bytes.NewBuffer(b)
 		actualTable.PrintTo(actualBuf)
 
-		Expect(actualBuf.String()).ToNot(MatchCLITable(table))
+		Expect(actualBuf.String()).ToNot(ContainCLITable(table))
 	})
 
 })

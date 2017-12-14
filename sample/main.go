@@ -35,7 +35,7 @@ func main() {
 	formattedCapturedOutput := strings.Join(capturedOutput[:4], "\n")
 	fmt.Printf("Captured:\n%s", formattedCapturedOutput)
 	fmt.Printf("Actual:\n%s", actual)
-	success, err := cli_table_matcher.MatchCLITable(expectedTable).Match(formattedCapturedOutput)
+	success, err := cli_table_matcher.ContainCLITable(expectedTable).Match(formattedCapturedOutput)
 	if err != nil {
 		panic(err)
 	}
