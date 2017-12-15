@@ -32,8 +32,8 @@ func main() {
 	println("len of captured output:", len(capturedOutput))
 	println("len of actual output", len(strings.Split(actualOutput.String(), "\n")))
 
-	formattedCapturedOutput := strings.Join(capturedOutput[:4], "\n")
-	fmt.Printf("Captured:\n%s", formattedCapturedOutput)
+	formattedCapturedOutput := strings.Join(capturedOutput[:len(capturedOutput)-1], "\n")
+	fmt.Printf("Formatted Captured:\n%s", formattedCapturedOutput)
 	fmt.Printf("Actual:\n%s", actual)
 	success, err := cli_table_matcher.ContainCLITable(expectedTable).Match(formattedCapturedOutput)
 	if err != nil {
