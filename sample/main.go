@@ -56,6 +56,9 @@ func demonstratePrintToWeirdness(t *terminal.Table) {
 	// For some reason once t.PrintTo is called once for against the object
 	// it is pointing to, it is unable to print again. That is, output2 is
 	// empty.
+	// A comment inside the PrintTo function mentions that the rows get
+	// cleared out so it cannot be printed again.
+
 	t.PrintTo(output2)
 	actual1 := output1.String()
 	actual2 := output2.String()
